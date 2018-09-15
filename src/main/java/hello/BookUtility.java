@@ -17,23 +17,43 @@ public class BookUtility {
 	
 	public static void main(String[] args) throws IOException {
 		
-		BookUtility b = new BookUtility();
-		String book = b.createStringFromBookFile();
+		BookUtility bookUtility = new BookUtility();
+		String book = bookUtility.createStringFromBookFile("book.txt");
+		String book2 = bookUtility.createStringFromBookFile("book2.txt");
+		String book3 = bookUtility.createStringFromBookFile("book3.txt");
+		String book4 = bookUtility.createStringFromBookFile("book4.txt");
+		String book5 = bookUtility.createStringFromBookFile("book5.txt");
+		ArrayList<String> books = new ArrayList<String>();
+		books.add(book);
+		books.add(book2);
+		books.add(book3);
+		books.add(book4);
+		books.add(book5);
 		
-		String randomSentence = b.findRandomSentence(book);
-		System.out.println(randomSentence);
-		//System.out.println(b.getLastWordOfSentence(randomSentence));
+		ArrayList<String> poem = new ArrayList<String>();
+		// create and print poem
+		for (int i = 0; i < 2; i++)
+		{
+	    	poem.addAll(bookUtility.createStanza(books));
+		}
 		
-		System.out.println(b.findRhymingSentence(book, randomSentence));
+		for (int i = 0; i < poem.size(); i++)
+		{
+			System.out.println(poem.get(i));
+			if (i == 3 || i == 7)
+			{
+				System.out.println();
+			}
+		}
 		
 	}
 	
 	/*
 	 * Creates a String object from a book text file.
 	 */
-	public String createStringFromBookFile() throws IOException {
+	public String createStringFromBookFile(String fileName) throws IOException {
     	Class clazz = GreetingController.class;
-        InputStream inputStream = clazz.getResourceAsStream("book.txt");
+        InputStream inputStream = clazz.getResourceAsStream(fileName);
         String book = readFromInputStream(inputStream);
         return book;
 	}
@@ -46,10 +66,42 @@ public class BookUtility {
 	    try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
 	        String line;
 	        while ((line = br.readLine()) != null) {
-	            resultStringBuilder.append(line).append("\n");
+	            resultStringBuilder.append(line).append(" \n");
 	        }
 	    }
 	  return resultStringBuilder.toString();
+    }
+    
+    public ArrayList<String> createStanza(ArrayList<String> books) throws IOException
+    {
+    	ArrayList<String> stanza = new ArrayList<String>();
+    	
+    	Random rn = new Random();
+    	int randomBook = rn.nextInt(books.size()-1);
+    	
+		for (int i = 0; i < 2; i++)
+		{
+			String randomSentence = findRandomSentence(books.get(randomBook));
+	    	while (!checkIfSentenceMatchesCriteria(randomSentence, true))
+	    	{
+	    		randomBook = rn.nextInt(books.size());
+	    		randomSentence = findRandomSentence(books.get(randomBook));
+	    		System.out.println(". . . trying to add" + randomSentence);
+	    	}
+	    	stanza.add(randomSentence);
+	    	System.out.println("!!!!!!!!!! ADDED " + randomSentence);
+	    	
+	    	String secondSentence = findRhymingSentence(books.get(randomBook), randomSentence);
+	    	while (!checkIfSentenceMatchesCriteria(secondSentence, false))
+	    	{
+	    		randomBook = rn.nextInt(books.size()-1);
+	    		secondSentence = findRhymingSentence(books.get(randomBook), randomSentence);
+	    		System.out.println(". . . trying to add" + secondSentence);
+	    	}
+	    	stanza.add(secondSentence);
+	    	System.out.println("!!!!!!!!!! ADDED " + secondSentence);
+		}
+		return stanza;
     }
     
     /*
@@ -57,23 +109,23 @@ public class BookUtility {
      */
     public String findRhymingSentence(String book, String sentence) throws IOException
     {
-		ArrayList<String> wordsThatRhymeWithSentence = getRhymingWordsForSentence(sentence);
+    	ArrayList<String> wordsThatRhymeWithSentence = getRhymingWordsForSentence(sentence);
+    	
+		String rhymingSentence = findRandomSentence(book);
 		
-        // TODO: this is the slowest way ever
-        String hopefulRhyme = findRandomSentence(book);
-        String lastWordFromHopefulRhyme = getLastWordOfSentence(hopefulRhyme);
+        String lastWordFromRhymingSentence = getLastWordOfSentence(rhymingSentence);
         
-        while (!wordsThatRhymeWithSentence.contains(lastWordFromHopefulRhyme))
+        while (!wordsThatRhymeWithSentence.contains(lastWordFromRhymingSentence))
         {
-            hopefulRhyme = findRandomSentence(book);
-            lastWordFromHopefulRhyme = getLastWordOfSentence(hopefulRhyme);
+            rhymingSentence = findRandomSentence(book);
+            lastWordFromRhymingSentence = getLastWordOfSentence(rhymingSentence);
         }
         
-        return hopefulRhyme;
+        return rhymingSentence;
 		
     }
     
-    private ArrayList<String> getRhymingWordsForSentence(String sentence) throws IOException
+    public static ArrayList<String> getRhymingWordsForSentence(String sentence) throws IOException
     {
     	String lastWordFromSentence = getLastWordOfSentence(sentence);
     	
@@ -89,49 +141,59 @@ public class BookUtility {
 			rhymingWords.addAll(Arrays.asList(result.threeSyllableRhymes));
 		}
 		
-        for (String rhyme : rhymingWords)
-        {
-        	System.out.println(rhyme);
-        }
-        
         return rhymingWords;
     }
     
     /*
      * Checks sentence criteria to make sure it will work in a poem.
      */
-    private boolean checkIfSentenceMatchesCriteria(String sentence)
+    private static boolean checkIfSentenceMatchesCriteria(String sentence, boolean isSentenceToBeRhymedOffOf) throws IOException
     {
-    	if (sentence.length() > 20 && sentence.length() < 80)
-    	{
-    		return true;
-    	}
-    	else
+    	// For any sentence
+    	if (sentence.length() < 25 || sentence.length() > 40)
     	{
     		return false;
     	}
+    	if (!sentence.contains(" "))
+    	{
+    		return false;
+    	}
+    	if (getLastWordOfSentence(sentence).equals("Mr") || getLastWordOfSentence(sentence).equals("Mrs"))
+    	{
+    		return false;
+    	}
+    	
+    	// For only the first sentence
+    	if (isSentenceToBeRhymedOffOf)
+    	{
+        	ArrayList<String> rhymingWords = getRhymingWordsForSentence(sentence);
+        	if (rhymingWords.size() < 3)
+        	{
+        		return false;
+        	}
+    	}
+    	
+    	return true;
     }
-    
-//    private boolean checkIfTwoSentencesRhyme(String sentence1, String sentence2)
-//    {
-//    	String word1 = getLastWordOfSentence(sentence1);
-//    	String word2 = getLastWordOfSentence(sentence2);
-//    	
-//    }
     
     /*
      * Returns last word of a provided sentence
      */
-    private String getLastWordOfSentence(String sentence)
+    private static String getLastWordOfSentence(String sentence)
     {
-    	String lastWord = sentence.substring(sentence.lastIndexOf(" ")+1);
+    	String lastWord = "";
+    	if (sentence.contains(" "))
+    	{
+    		lastWord = sentence.substring(sentence.lastIndexOf(" ")+1);
+    	}
+
     	return lastWord;
     }
     
     /*
      * Returns random sentence.
      */
-    public String findRandomSentence(String book)
+    public String findRandomSentence(String book) throws IOException
     {
     	int startingPoint = randomizeStartingPoint(book);
     	
@@ -152,19 +214,26 @@ public class BookUtility {
     		sentence = book.substring(firstCharIndex + 1, a);
     	}
 
+    	sentence = cleanString(sentence);
+    	
+    	
+    	return sentence;
+    }
+    
+    public String cleanString(String sentence)
+    {
     	sentence = sentence.replace("\n", "");
     	sentence = sentence.replace("\"", "");
     	sentence = sentence.replace("“", "");
     	sentence = sentence.replace("”", "");
+    	sentence = sentence.replace("(", "");
+    	sentence = sentence.replace(")", "");
     	
-    	if (checkIfSentenceMatchesCriteria(sentence))
-    	{
-    		return sentence;
-    	}
-    	else
-    	{
-    		return findRandomSentence(book);
-    	}
+    	//if (false)//Character.isWhitespace(sentence.charAt(1)))
+    	//{
+    	//	sentence = sentence.substring(2, sentence.length());
+    	//}
+    	return sentence;
     }
     
     /*

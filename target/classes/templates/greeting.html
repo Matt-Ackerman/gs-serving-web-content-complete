@@ -5,7 +5,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <p th:text="${randomSentence}" />
-    <p th:text="${rhymingSentence}" />
+<table>
+    <tbody>
+        <tr th:each="poemLine : ${poem}">
+            <td><span th:text="${poemLine.toString()}"> Title </span></td>
+        </tr>
+    </tbody>
+</table>
 </body>
 </html>

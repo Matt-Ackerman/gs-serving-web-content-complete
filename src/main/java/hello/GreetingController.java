@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,19 +18,27 @@ public class GreetingController {
     @GetMapping("/greeting")
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) throws IOException {
         
-		BookUtility b = new BookUtility();
-		String book = b.createStringFromBookFile();
+		BookUtility bookUtility = new BookUtility();
+		//String book = bookUtility.createStringFromBookFile();
 		
-		String randomSentence = b.findRandomSentence(book);
-		System.out.println(randomSentence);
-		//System.out.println(b.getLastWordOfSentence(randomSentence));
+		ArrayList<String> poem = new ArrayList<String>();
+		// create and print poem
+		for (int i = 0; i < 2; i++)
+		{
+	    //	poem.addAll(bookUtility.createStanza(book));
+		}
 		
-		System.out.println(b.findRhymingSentence(book, randomSentence));
+		for (int i = 0; i < poem.size(); i++)
+		{
+			System.out.println(poem.get(i));
+			if (i == 3 || i == 7)
+			{
+				System.out.println();
+			}
+		}
     	
     	
-    	
-    	model.addAttribute("randomSentence", randomSentence);
-        model.addAttribute("rhymingSentence", b.findRhymingSentence(book, randomSentence));
+    	model.addAttribute("poem", poem);
         return "greeting";
     }
 
