@@ -1,7 +1,0 @@
--------------------------------------------------------------------------------
-Test set: hello.ApplicationTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.345 s <<< FAILURE! - in hello.ApplicationTest
-initializationError(hello.ApplicationTest)  Time elapsed: 0.008 s  <<< ERROR!
-java.lang.Exception: No runnable methods
-

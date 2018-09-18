@@ -1,10 +1,65 @@
 <!DOCTYPE HTML>
-<html>
-<head> 
-    <title>Getting Started: Serving Web Content</title> 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<html xmlns:form="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/app.js"></script>
+
+
+
+
+
 </head>
 <body>
-    <p>Get your greeting <a href="/greeting">here</a></p>
+	<div class="jumbotron text-center">
+		<h1>My First Bootstrap Page</h1>
+		<p>Resize this responsive page to see the effect!</p>
+	</div>
+	<p>
+		
+	</p>
+	<div class="container">
+		<h1>Get poetry</h1>
+		<p>Get your greeting <a href="/greeting">here</a></p>
+	</div>
+	
+		<script>
+	
+
+			$(document).ready(function() {
+
+				$('#getPoem').click(function() {
+
+					$.ajax({
+						url : "get-poem.html",
+			            success : function(data) {
+			                $('#result').html(data);
+			            }
+					});
+				});
+
+			});
+		</script>
+	
+	<button class="button" id="connect" type="submit">connect</button>
+	<button class="button" id="getPoem" type="submit">get poem</button>
+
+	
+	
+	<div id="result"></div>
+	
+	
+	
+	    <div class="pane">
+        <div class="stream-table">
+            <table class="table">
+                <tbody id="poemLines">
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 </html>

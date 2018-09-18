@@ -61,11 +61,6 @@ public class SentenceUtility
      */
     public boolean checkIfSentenceMatchesCriteria(String sentence, boolean isSentenceToBeRhymedOffOf) throws IOException
     {
-    	// For any sentence
-    	if (sentence.length() < 20 || sentence.length() > 50)
-    	{
-    		return false;
-    	}
     	if (!sentence.contains(" "))
     	{
     		return false;
@@ -79,7 +74,7 @@ public class SentenceUtility
     	if (isSentenceToBeRhymedOffOf)
     	{
         	ArrayList<String> rhymingWords = getRhymingWordsForSentence(sentence);
-        	if (rhymingWords.size() < 50)
+        	if (rhymingWords.size() < 70)
         	{
         		return false;
         	}

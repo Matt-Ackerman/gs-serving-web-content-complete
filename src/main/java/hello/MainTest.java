@@ -3,9 +3,11 @@ package hello;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class MainTest {
+public class MainTest
+{
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException
+	{
 		
 		PoemUtility poemUtility = new PoemUtility();
 
@@ -24,7 +26,5 @@ public class MainTest {
 				System.out.println();
 			}
 		}
-		
 	}
-
 }

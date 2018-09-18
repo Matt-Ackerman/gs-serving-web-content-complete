@@ -44,7 +44,6 @@ public class RhymingSentence
 		 while (!sentenceUtility.checkIfSentenceMatchesCriteria(sentence, true))
 		 {
 			 findRhymingSentence(bookUtility.getRandomBook());
-			 System.out.println(". . . trying to add" + sentence);
 		 }
 	}
 	

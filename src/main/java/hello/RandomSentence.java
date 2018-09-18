@@ -36,7 +36,6 @@ public class RandomSentence
 		while (!sentenceUtility.checkIfSentenceMatchesCriteria(sentence, true))
 		{
 			findRandomSentence(bookUtility.getRandomBook());
-			System.out.println(". . . trying to add" + sentence);
 		}
 	}
 	
@@ -45,23 +44,33 @@ public class RandomSentence
      */
     public void findRandomSentence(String book) throws IOException
     {
-    	int startingPoint = randomizeStartingPoint(book);
-    	
-    	int firstCharIndex = book.indexOf(".", startingPoint);
-    	
-    	int a = book.indexOf(".", firstCharIndex + 1);
-    	int b = book.indexOf(",", firstCharIndex + 1);
-    	int c = book.indexOf("!", firstCharIndex + 1);
-    	
+
     	String sentence = "";
     	
-    	if (a > 0 && b > 0 && c > 0)
+    	// Checks length, checks if it contains digits, etc.
+    	while ((sentence.length() < 25 || sentence.length() > 50) ||
+    			sentence.contains("CHAPTER") ||
+    			sentence.matches(".*\\d+.*"))
     	{
-    		sentence = book.substring(firstCharIndex + 1, Math.min(a, Math.min(b, c)));
-    	}
-    	else
-    	{
-    		sentence = book.substring(firstCharIndex + 1, a);
+        	int startingPoint = randomizeStartingPoint(book);
+        	
+        	int firstCharIndex = book.indexOf(".", startingPoint);
+        	
+        	int a = book.indexOf(".", firstCharIndex + 1);
+        	int b = book.indexOf(",", firstCharIndex + 1);
+        	int c = book.indexOf("!", firstCharIndex + 1);
+        	int d = book.indexOf("?", firstCharIndex + 1);
+        	
+        	// Trim the sentence to the next . or , or ! or ?
+        	if (a > 0 && b > 0 && c > 0 && d > 0)
+        	{
+        		sentence = book.substring(firstCharIndex + 1, Math.min(Math.min(a,b), Math.min(c, d)));
+        	}
+        	else
+        	{
+        		sentence = book.substring(firstCharIndex + 1, a);
+        	}
+        	System.out.println(". . . trying to add: " + cleanString(sentence));
     	}
 
     	this.sentence = cleanString(sentence);
@@ -87,7 +96,7 @@ public class RandomSentence
     	sentence = sentence.replace("”", "");
     	sentence = sentence.replace("(", "");
     	sentence = sentence.replace(")", "");
-    	
+    	sentence = sentence.replace("_", "");
     	//if (false)//Character.isWhitespace(sentence.charAt(1)))
     	//{
     	//	sentence = sentence.substring(2, sentence.length());
