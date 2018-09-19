@@ -38,19 +38,19 @@ public class RhymingSentence
 		 this.sentenceToRhymeOffOf = sentenceToRhymeOffOf;
 		 
 		 // find a rhyming sentence from a random book
-		 findRhymingSentence(bookUtility.getRandomBook());
+		 findRhymingSentence(bookUtility);
 		 
 		 // If the sentence doesn't match criteria, keep searching until you get one
 		 while (!sentenceUtility.checkIfSentenceMatchesCriteria(sentence, true))
 		 {
-			 findRhymingSentence(bookUtility.getRandomBook());
+			 findRhymingSentence(bookUtility);
 		 }
 	}
 	
     /*
      * Finds a corresponding rhyming sentence for the provided sentence in the provided book.
      */
-    public void findRhymingSentence(String book) throws IOException
+    public void findRhymingSentence(BookUtility bookUtility) throws IOException
     {
     	// find the rhyming words for the sentence we need to rhyme off of
     	ArrayList<String> wordsThatRhymeWithSentence = 
@@ -66,7 +66,7 @@ public class RhymingSentence
         // keep getting a random new sentence until its last word is a rhyming word
         while (!wordsThatRhymeWithSentence.contains(lastWordFromNewSentence))
         {
-        	newSentence.findRandomSentence(book);
+        	newSentence.findRandomSentence(bookUtility.getRandomBook());
         	newSentenceString = newSentence.getSentence();
         	
             lastWordFromNewSentence = sentenceUtility.getLastWordOfSentence(newSentenceString);

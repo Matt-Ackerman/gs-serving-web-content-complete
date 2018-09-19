@@ -8,10 +8,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="/app.js"></script>
 
-
-
-
-
 </head>
 <body>
 	<div class="jumbotron text-center">
@@ -36,30 +32,41 @@
 					$.ajax({
 						url : "get-poem.html",
 			            success : function(data) {
-			                $('#result').html(data);
+			                display(data);
 			            }
 					});
 				});
 
 			});
+			
+			function display(data) {
+				
+				var json = JSON.parse(data);
+				//$('#result').html(json);
+			    var tableRows = [];
+			    for (var i = 0; i < 8; i++) {
+			    	tableRows.push('<tr>');
+			    	tableRows.push("<td>" + json[i] + "</td>");
+			    	tableRows.push('</tr>');
+			    	
+			    	if (i === 3)
+			    	{
+			    		tableRows.push('<tr>');
+				    	tableRows.push("<td></td>");
+				    	tableRows.push('</tr>');
+			    	}
+			    }
+			    $('table').append($(tableRows.join('')));
+			}
+			
 		</script>
 	
-	<button class="button" id="connect" type="submit">connect</button>
 	<button class="button" id="getPoem" type="submit">get poem</button>
 
-	
-	
-	<div id="result"></div>
-	
-	
-	
-	    <div class="pane">
-        <div class="stream-table">
-            <table class="table">
-                <tbody id="poemLines">
-                </tbody>
-            </table>
-        </div>
-    </div>
+	<table class="table">
+		<thead></thead>
+		<tbody></tbody>
+	</table>
+
 </body>
 </html>
