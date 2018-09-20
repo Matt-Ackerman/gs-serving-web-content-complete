@@ -24,6 +24,16 @@ public class RandomSentence
 	/*
 	 * 
 	 */
+	private String titleOfBookSentenceIsFrom;
+	
+	/*
+	 * 
+	 */
+	private String authorOfBookSentenceIsFrom;
+	
+	/*
+	 * 
+	 */
 	public RandomSentence() throws IOException
 	{
 		bookUtility = new BookUtility();
@@ -42,9 +52,9 @@ public class RandomSentence
     /*
      * Returns random sentence.
      */
-    public void findRandomSentence(String book) throws IOException
+    public void findRandomSentence(Book book) throws IOException
     {
-
+    	String bookText = book.getText();
     	String sentence = "";
     	
     	// Checks length, checks if it contains digits, etc.
@@ -52,28 +62,30 @@ public class RandomSentence
     			sentence.contains("CHAPTER") ||
     			sentence.matches(".*\\d+.*"))
     	{
-        	int startingPoint = randomizeStartingPoint(book);
+        	int startingPoint = randomizeStartingPoint(bookText);
         	
-        	int firstCharIndex = book.indexOf(".", startingPoint);
+        	int firstCharIndex = bookText.indexOf(".", startingPoint);
         	
-        	int a = book.indexOf(".", firstCharIndex + 1);
-        	int b = book.indexOf(",", firstCharIndex + 1);
-        	int c = book.indexOf("!", firstCharIndex + 1);
-        	int d = book.indexOf("?", firstCharIndex + 1);
+        	int a = bookText.indexOf(".", firstCharIndex + 1);
+        	int b = bookText.indexOf(",", firstCharIndex + 1);
+        	int c = bookText.indexOf("!", firstCharIndex + 1);
+        	int d = bookText.indexOf("?", firstCharIndex + 1);
         	
         	// Trim the sentence to the next . or , or ! or ?
         	if (a > 0 && b > 0 && c > 0 && d > 0)
         	{
-        		sentence = book.substring(firstCharIndex + 1, Math.min(Math.min(a,b), Math.min(c, d)));
+        		sentence = bookText.substring(firstCharIndex + 1, Math.min(Math.min(a,b), Math.min(c, d)));
         	}
         	else
         	{
-        		sentence = book.substring(firstCharIndex + 1, a);
+        		sentence = bookText.substring(firstCharIndex + 1, a);
         	}
-        	System.out.println(". . . trying to add: " + cleanString(sentence));
+        	//System.out.println(". . . trying to add: " + cleanString(sentence));
     	}
 
     	this.sentence = cleanString(sentence);
+    	this.authorOfBookSentenceIsFrom = book.getAuthor();
+    	this.titleOfBookSentenceIsFrom = book.getTitle();
     }
     
     /*
@@ -104,9 +116,46 @@ public class RandomSentence
     	return sentence;
     }
     
+	public void setSentence(String sentence)
+	{
+		this.sentence = sentence;
+	}
+	
     public String getSentence()
     {
     	return sentence;
     }
+
+	public BookUtility getBookUtility() {
+		return bookUtility;
+	}
+
+	public void setBookUtility(BookUtility bookUtility) {
+		this.bookUtility = bookUtility;
+	}
+
+	public SentenceUtility getSentenceUtility() {
+		return sentenceUtility;
+	}
+
+	public void setSentenceUtility(SentenceUtility sentenceUtility) {
+		this.sentenceUtility = sentenceUtility;
+	}
+
+	public String getTitleOfBookSentenceIsFrom() {
+		return titleOfBookSentenceIsFrom;
+	}
+
+	public void setTitleOfBookSentenceIsFrom(String titleOfBookSentenceIsFrom) {
+		this.titleOfBookSentenceIsFrom = titleOfBookSentenceIsFrom;
+	}
+
+	public String getAuthorOfBookSentenceIsFrom() {
+		return authorOfBookSentenceIsFrom;
+	}
+
+	public void setAuthorOfBookSentenceIsFrom(String authorOfBookSentenceIsFrom) {
+		this.authorOfBookSentenceIsFrom = authorOfBookSentenceIsFrom;
+	}
 
 }

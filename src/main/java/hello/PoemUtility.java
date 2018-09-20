@@ -17,19 +17,27 @@ public class PoemUtility
 	/*
 	 * 
 	 */
-    public ArrayList<String> createStanza() throws IOException
+    public ArrayList<PoemLine> createStanza() throws IOException
     {
-    	ArrayList<String> stanza = new ArrayList<String>();
+    	ArrayList<PoemLine> stanza = new ArrayList<PoemLine>();
     	
 		for (int i = 0; i < 2; i++)
 		{
 			RandomSentence randomSentence = new RandomSentence();
-	    	stanza.add(randomSentence.getSentence());
-	    	System.out.println("!!!!!!!!!! ADDED " + randomSentence.getSentence());
+			PoemLine randomLine = new PoemLine(randomSentence.getSentence(),
+					randomSentence.getTitleOfBookSentenceIsFrom(),
+					randomSentence.getAuthorOfBookSentenceIsFrom());
+
+	    	stanza.add(randomLine);
+	    	System.out.println("!!!!!!!!!! ADDED " + randomLine.getSentence());
 	    	
 			RhymingSentence rhymingSentence = new RhymingSentence(randomSentence);
-	    	stanza.add(rhymingSentence.getSentence());
-	    	System.out.println("!!!!!!!!!! ADDED " + rhymingSentence.getSentence());
+			PoemLine rhymingLine = new PoemLine(rhymingSentence.getSentence(),
+					rhymingSentence.getTitleOfBookSentenceIsFrom(),
+					rhymingSentence.getAuthorOfBookSentenceIsFrom());
+
+	    	stanza.add(rhymingLine);
+	    	System.out.println("!!!!!!!!!! ADDED " + rhymingLine.getSentence());
 		}
 		return stanza;
     }

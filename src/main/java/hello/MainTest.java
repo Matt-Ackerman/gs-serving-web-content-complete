@@ -9,9 +9,9 @@ public class MainTest
 	public static void main(String[] args) throws IOException
 	{
 		Poem poem = new Poem();
-		for (String poemLine : poem.getPoemLines())
+		for (PoemLine poemLine : poem.getPoemLines())
 		{
-			System.out.println(poemLine);
+			System.out.println(poemLine.getTitle() + " - " + poemLine.getSentence());
 		}
 	}
 }

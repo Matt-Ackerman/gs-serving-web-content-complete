@@ -7,66 +7,67 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="/app.js"></script>
+<script>
+	$(document).ready(function() {
 
-</head>
-<body>
-	<div class="jumbotron text-center">
-		<h1>My First Bootstrap Page</h1>
-		<p>Resize this responsive page to see the effect!</p>
-	</div>
-	<p>
-		
-	</p>
-	<div class="container">
-		<h1>Get poetry</h1>
-		<p>Get your greeting <a href="/greeting">here</a></p>
-	</div>
-	
-		<script>
-	
+		$('#getPoem').on('click touchstart', function() {
+			
+			var x = document.getElementById("myDIV");
+		    if (x.style.display === "none") {
+		        x.style.display = "block";
+		    } else {
+		        x.style.display = "none";
+		    }
 
-			$(document).ready(function() {
-
-				$('#getPoem').click(function() {
-
-					$.ajax({
-						url : "get-poem.html",
-			            success : function(data) {
-			                display(data);
-			            }
-					});
-				});
-
+			$.ajax({
+				url : "get-poem.html",
+				success : function(data) {
+					display(data);
+				}
 			});
 			
-			function display(data) {
-				
-				var json = JSON.parse(data);
-				//$('#result').html(json);
-			    var tableRows = [];
-			    for (var i = 0; i < 8; i++) {
-			    	tableRows.push('<tr>');
-			    	tableRows.push("<td>" + json[i] + "</td>");
-			    	tableRows.push('</tr>');
-			    	
-			    	if (i === 3)
-			    	{
-			    		tableRows.push('<tr>');
-				    	tableRows.push("<td></td>");
-				    	tableRows.push('</tr>');
-			    	}
-			    }
-			    $('table').append($(tableRows.join('')));
+		});
+
+	});
+
+	function display(data) {
+
+		var json = JSON.parse(data);
+		//$('#result').html(json);
+		var tableRows = [];
+		for (var i = 0; i < 8; i++) {
+			tableRows.push('<tr>');
+			tableRows.push("<td>" + json[i].title + " - " + 
+					json[i].author + "                " + json[i].sentence + "</td>");
+			tableRows.push('</tr>');
+
+			if (i === 3) {
+				tableRows.push('<tr>');
+				tableRows.push("<td></td>");
+				tableRows.push('</tr>');
 			}
-			
-		</script>
-	
+		}
+		$('table').append($(tableRows.join('')));
+	}
+</script>
+</head>
+<body>
+
+	<div class="jumbotron text-center">
+		<h1>Poem from books</h1>
+		<p>info about stuff.</p>
+	</div>
+
 	<button class="button" id="getPoem" type="submit">get poem</button>
 
-	<table class="table">
-		<thead></thead>
-		<tbody></tbody>
-	</table>
+	<div id="myDIV">Poem is loading.</div>
+
+	<div class="container">
+		<table class="table">
+			<thead></thead>
+			<tbody></tbody>
+		</table>
+	</div>
 
 </body>
 </html>

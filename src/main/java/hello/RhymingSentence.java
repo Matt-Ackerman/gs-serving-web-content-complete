@@ -29,6 +29,16 @@ public class RhymingSentence
 	/*
 	 * 
 	 */
+	private String titleOfBookSentenceIsFrom;
+	
+	/*
+	 * 
+	 */
+	private String authorOfBookSentenceIsFrom;
+	
+	/*
+	 * 
+	 */
 	public RhymingSentence(RandomSentence sentenceToRhymeOffOf) throws IOException
 	{
 		 sentenceUtility = new SentenceUtility();
@@ -73,10 +83,57 @@ public class RhymingSentence
         }
         
         this.sentence = newSentenceString;
+        this.authorOfBookSentenceIsFrom = newSentence.getAuthorOfBookSentenceIsFrom();
+        this.titleOfBookSentenceIsFrom = newSentence.getAuthorOfBookSentenceIsFrom();
     }
     
     public String getSentence()
     {
     	return sentence;
     }
+    
+	public void setSentence(String sentence) {
+		this.sentence = sentence;
+	}
+
+	public SentenceUtility getSentenceUtility() {
+		return sentenceUtility;
+	}
+
+	public void setSentenceUtility(SentenceUtility sentenceUtility) {
+		this.sentenceUtility = sentenceUtility;
+	}
+
+	public BookUtility getBookUtility() {
+		return bookUtility;
+	}
+
+	public void setBookUtility(BookUtility bookUtility) {
+		this.bookUtility = bookUtility;
+	}
+
+	public RandomSentence getSentenceToRhymeOffOf() {
+		return sentenceToRhymeOffOf;
+	}
+
+	public void setSentenceToRhymeOffOf(RandomSentence sentenceToRhymeOffOf) {
+		this.sentenceToRhymeOffOf = sentenceToRhymeOffOf;
+	}
+
+	public String getTitleOfBookSentenceIsFrom() {
+		return titleOfBookSentenceIsFrom;
+	}
+
+	public void setTitleOfBookSentenceIsFrom(String titleOfBookSentenceIsFrom) {
+		this.titleOfBookSentenceIsFrom = titleOfBookSentenceIsFrom;
+	}
+
+	public String getAuthorOfBookSentenceIsFrom() {
+		return authorOfBookSentenceIsFrom;
+	}
+
+	public void setAuthorOfBookSentenceIsFrom(String authorOfBookSentenceIsFrom) {
+		this.authorOfBookSentenceIsFrom = authorOfBookSentenceIsFrom;
+	}
+	
 }

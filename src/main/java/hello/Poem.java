@@ -5,13 +5,13 @@ import java.util.ArrayList;
 
 public class Poem {
 
-	private ArrayList<String> poemLines = new ArrayList<String>();
+	private ArrayList<PoemLine> poemLines;
 	
 	public Poem() throws IOException
 	{
 		PoemUtility poemUtility = new PoemUtility();
-
-		ArrayList<String> poem = new ArrayList<String>();
+		
+		poemLines = new ArrayList<PoemLine>();
 		// create and print poem
 		for (int i = 0; i < 2; i++)
 		{
@@ -19,7 +19,7 @@ public class Poem {
 		}
 	}
 	
-	public ArrayList<String> getPoemLines()
+	public ArrayList<PoemLine> getPoemLines()
 	{
 		return poemLines;
 	}
