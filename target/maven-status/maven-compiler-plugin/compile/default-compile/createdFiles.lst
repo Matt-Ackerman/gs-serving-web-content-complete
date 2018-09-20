@@ -1,6 +1,5 @@
 hello/RhymingSentence.class
 hello/PoemLine.class
-hello/RhymeTest.class
 hello/BookUtility.class
 hello/RandomSentence.class
 hello/WebSocketConfig.class

@@ -3,22 +3,33 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="/style.css" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="/app.js"></script>
 <script>
+
+	// When the page is opened
 	$(document).ready(function() {
 
+		// When you click the get poem button
 		$('#getPoem').on('click touchstart', function() {
-			
+			// Hide or show a text
 			var x = document.getElementById("myDIV");
 		    if (x.style.display === "none") {
 		        x.style.display = "block";
 		    } else {
 		        x.style.display = "none";
 		    }
+		    
+		 	// Delete table rows
+		    var table = document.getElementById("table");
+		    while(table.rows.length > 0) {
+		    	  table.deleteRow(0);
+		    	}
 
+		    // Trigger the spring boot controller and go to display() function with result
 			$.ajax({
 				url : "get-poem.html",
 				success : function(data) {
@@ -30,6 +41,7 @@
 
 	});
 
+	// This is triggered by response from spring boot
 	function display(data) {
 
 		var json = JSON.parse(data);
@@ -38,7 +50,7 @@
 		for (var i = 0; i < 8; i++) {
 			tableRows.push('<tr>');
 			tableRows.push("<td>" + json[i].title + " - " + 
-					json[i].author + "                " + json[i].sentence + "</td>");
+					json[i].author + "....................." + json[i].sentence + "</td>");
 			tableRows.push('</tr>');
 
 			if (i === 3) {
@@ -47,9 +59,10 @@
 				tableRows.push('</tr>');
 			}
 		}
-		$('table').append($(tableRows.join('')));
+		$('#table').append($(tableRows.join('')));
 	}
 </script>
+
 </head>
 <body>
 
@@ -58,12 +71,14 @@
 		<p>info about stuff.</p>
 	</div>
 
-	<button class="button" id="getPoem" type="submit">get poem</button>
-
+	<div class="buttons">
+		<button class="button" id="getPoem" type="submit">get poem</button>
+	</div>
+	
 	<div id="myDIV">Poem is loading.</div>
 
-	<div class="container">
-		<table class="table">
+	<div class="tableDiv">
+		<table id="table">
 			<thead></thead>
 			<tbody></tbody>
 		</table>
