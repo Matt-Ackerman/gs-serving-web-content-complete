@@ -13,14 +13,27 @@ body {
     padding-bottom: 2%;
 }
 
-.tableDiv {
+#table {
 	text-align: center;
+	width: 40%;
 }
 
-#myDIV {
+th {
+    white-space: nowrap;
+}
+
+#poemIsLoading {
 	align-items: center;
     display: flex;
     justify-content: center;
     padding-top: 2%;
     padding-bottom: 2%;
+}
+
+#bookTitleAndAuthor {
+	background-color: red;
+}
+
+#sentence {
+	color: black;
 }

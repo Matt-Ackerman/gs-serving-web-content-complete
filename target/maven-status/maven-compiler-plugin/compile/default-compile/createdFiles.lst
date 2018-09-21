@@ -1,10 +1,7 @@
 hello/RhymingSentence.class
-hello/PoemLine.class
 hello/BookUtility.class
 hello/RandomSentence.class
-hello/WebSocketConfig.class
 hello/Application.class
 hello/MainTest.class
 hello/SentenceUtility.class
 hello/GreetingController.class
-hello/PoemUtility.class

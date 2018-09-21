@@ -19,7 +19,7 @@ public class RhymingSentence
 	/*
 	 * 
 	 */
-	private RandomSentence sentenceToRhymeOffOf;
+	private String sentenceToRhymeOffOf;
 	
 	/*
 	 * 
@@ -39,7 +39,7 @@ public class RhymingSentence
 	/*
 	 * 
 	 */
-	public RhymingSentence(RandomSentence sentenceToRhymeOffOf) throws IOException
+	public RhymingSentence(String sentenceToRhymeOffOf) throws IOException
 	{
 		 sentenceUtility = new SentenceUtility();
 		 bookUtility = new BookUtility();
@@ -64,7 +64,7 @@ public class RhymingSentence
     {
     	// find the rhyming words for the sentence we need to rhyme off of
     	ArrayList<String> wordsThatRhymeWithSentence = 
-    			sentenceUtility.getRhymingWordsForSentence(sentenceToRhymeOffOf.getSentence());
+    			sentenceUtility.getRhymingWordsForSentence(sentenceToRhymeOffOf);
     	
     	// create a random new sentence
     	RandomSentence newSentence = new RandomSentence();
@@ -112,11 +112,11 @@ public class RhymingSentence
 		this.bookUtility = bookUtility;
 	}
 
-	public RandomSentence getSentenceToRhymeOffOf() {
+	public String getSentenceToRhymeOffOf() {
 		return sentenceToRhymeOffOf;
 	}
 
-	public void setSentenceToRhymeOffOf(RandomSentence sentenceToRhymeOffOf) {
+	public void String(String sentenceToRhymeOffOf) {
 		this.sentenceToRhymeOffOf = sentenceToRhymeOffOf;
 	}
 

@@ -16,7 +16,7 @@
 		// When you click the get poem button
 		$('#getPoem').on('click touchstart', function() {
 			// Hide or show a text
-			var x = document.getElementById("myDIV");
+			var x = document.getElementById("poemIsLoading");
 		    if (x.style.display === "none") {
 		        x.style.display = "block";
 		    } else {
@@ -32,8 +32,9 @@
 		    // Trigger the spring boot controller and go to display() function with result
 			$.ajax({
 				url : "get-poem.html",
+				data : {'sentence' : null},
 				success : function(data) {
-					display(data);
+					addLineToTable(data);
 				}
 			});
 			
@@ -41,25 +42,46 @@
 
 	});
 
+
 	// This is triggered by response from spring boot
-	function display(data) {
+	function addLineToTable(data) {
 
 		var json = JSON.parse(data);
-		//$('#result').html(json);
-		var tableRows = [];
-		for (var i = 0; i < 8; i++) {
-			tableRows.push('<tr>');
-			tableRows.push("<td>" + json[i].title + " - " + 
-					json[i].author + "....................." + json[i].sentence + "</td>");
-			tableRows.push('</tr>');
 
-			if (i === 3) {
-				tableRows.push('<tr>');
-				tableRows.push("<td></td>");
-				tableRows.push('</tr>');
-			}
+		var newRow = document.getElementById('table').insertRow();
+
+		var lineString = "<td><div id=\'bookTitleAndAuthor\'>"
+							+ json.title + " - " + json.author + "</div>"
+							+ "<div id=\'sentence\'>" + json.sentence + "</div></td>";
+		
+		newRow.innerHTML = lineString;
+
+		var rowCount = document.getElementById("table").rows.length;
+		if (rowCount == 8) {
+			return false;
 		}
-		$('#table').append($(tableRows.join('')));
+		if (rowCount % 2 != 0) {
+			$.ajax({
+				url : "get-poem.html",
+				data : {
+					'sentence' : json.sentence
+				},
+				success : function(data) {
+					addLineToTable(data);
+				}
+			});
+		} else {
+			$.ajax({
+				url : "get-poem.html",
+				data : {
+					'sentence' : null
+				},
+				success : function(data) {
+					addLineToTable(data);
+				}
+			});
+		}
+
 	}
 </script>
 
@@ -75,14 +97,12 @@
 		<button class="button" id="getPoem" type="submit">get poem</button>
 	</div>
 	
-	<div id="myDIV">Poem is loading.</div>
+	<div id="poemIsLoading">Poem is loading.</div>
 
-	<div class="tableDiv">
 		<table id="table">
 			<thead></thead>
 			<tbody></tbody>
 		</table>
-	</div>
 
 </body>
 </html>
