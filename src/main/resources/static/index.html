@@ -31,6 +31,17 @@
 			});
 
 		});
+		
+		var infoIsShowing = false;
+		$('#getInfo').on('click touchstart', function() {
+	        if (infoIsShowing) {
+	        	$("#orange-bar").hide('slow');
+	        	infoIsShowing = false;
+	        } else {
+	        	$("#orange-bar").show('slow').css('display', 'flex');
+	        	infoIsShowing = true;
+	        }
+		});
 
 	});
 
@@ -75,18 +86,26 @@
 		}
 
 	}
+	
 </script>
 
 </head>
 <body>
 
-	<div class="jumbotron text-center">
-		<h1><img src="https://melbournechapter.net/images/autumn-clipart-6.png" width="80" height="100">poetryscript</h1>
-		<p>discover beauty through chance.</p>
+	<div id="header">
+		<img src="https://melbournechapter.net/images/autumn-clipart-6.png"
+			width="80" height="100">poetryscript
+	</div>
+	
+	<div id="header2">discover beauty through chance.</div>
+	
+	<div id="orange-bar">
+	the poetryscript project scans thousands of books from gutenberg.com to produce to produce rhyming schemes that follow conventional poetry standards. 
 	</div>
 
 	<div class="buttons">
-		<button class="button" id="getPoem" type="submit">discover poem</button>
+		<button class="button" id="getPoem" type="submit">discover</button>
+		<button class="button" id="getInfo" type="submit">about</button>
 	</div>
 
 	<div class="mini-loader-content">

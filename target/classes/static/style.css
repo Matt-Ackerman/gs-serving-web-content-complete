@@ -3,6 +3,36 @@ body {
 	background-color: white;
 }
 
+#header {
+	text-align: center;
+	font-family: 'Lora', serif;
+	font-size: 40px;
+	padding-top: 8%;
+}
+
+#header2 {
+	text-align: center;
+	font-family: 'Lora', serif;
+	font-size: 17px;
+	padding-left: 16%;
+	padding-bottom: 5%;
+	margin-top: -23px;
+}
+
+#orange-bar {
+	display: none;
+	width:100%;
+	text-align: center;
+	font-family: 'Lora', serif;
+	font-size: 16px;
+	padding-top: 10px;
+	padding-left: 7%;
+	padding-right: 7%;
+	padding-bottom: 10px;
+	background-color: rgb(224, 206, 116);
+	height: 10%;
+}
+
 button {
     -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
     -moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
@@ -24,14 +54,14 @@ button.button {
 
 button.button:hover {
     color: rgba(255, 255, 255, 0.85);
-    box-shadow: rgb(255, 136, 25) 0 80px 0px 2px inset;
+    box-shadow: rgb(201,82,43) 0 80px 0px 2px inset;
 }
 
 .buttons {
 	align-items: center;
 	display: flex;
 	justify-content: center;
-	padding-top: 5px;
+	padding-top: 5%;
 	padding-bottom: 15px;
 }
 
@@ -68,8 +98,7 @@ li {
 	justify-content: center;
 }
 
-
-/* Loading icon */
+/* Everything below this is for the loading icon */
 .mini-loader-content {
     display: none;
     padding-top: 5x;
@@ -78,7 +107,6 @@ li {
     justify-content: center;
 }
 
-/* Loading icon */
 svg#mini-loader {
     height: 20px;
     width: 20px;
