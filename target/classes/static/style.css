@@ -1,39 +1,216 @@
 body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    background-color: white;
+	height: 100%;
+	background-color: white;
+}
+
+button {
+    -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    -moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    -ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    -o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    display: block;
+    margin: 20px auto;
+    max-width: 180px;
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 20px 30px;
+}
+
+button.button {
+    color: rgba(30, 22, 54, 0.6);
+    box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;
+}
+
+button.button:hover {
+    color: rgba(255, 255, 255, 0.85);
+    box-shadow: rgb(255, 136, 25) 0 80px 0px 2px inset;
 }
 
 .buttons {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    padding-top: 2%;
-    padding-bottom: 2%;
-}
-
-#table {
-	text-align: center;
-	width: 40%;
-}
-
-th {
-    white-space: nowrap;
-}
-
-#poemIsLoading {
 	align-items: center;
-    display: flex;
-    justify-content: center;
-    padding-top: 2%;
-    padding-bottom: 2%;
+	display: flex;
+	justify-content: center;
+	padding-top: 5px;
+	padding-bottom: 15px;
 }
 
-#bookTitleAndAuthor {
-	background-color: red;
+#titleAndAuthor {
+	color: gray;
+	text-align: right;
+	font-weight: lighter;
+	font-style: italic;
 }
 
 #sentence {
 	color: black;
+	text-align: left;
+}
+
+ul {
+	list-style: none;
+	font-family: 'Lora', serif;
+	font-size: 17px;
+}
+
+li {
+	padding-bottom: 10px;
+}
+
+#doublerow {
+	display: inline-block;
+	float: left;
+}
+
+.list {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+
+/* Loading icon */
+.mini-loader-content {
+    display: none;
+    padding-top: 5x;
+    padding-bottom: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Loading icon */
+svg#mini-loader {
+    height: 20px;
+    width: 20px;
+}
+
+#b0 {
+    animation: b0 4s infinite ease;
+    transform-origin: 250px 250px;
+}
+
+#b1 {
+    animation: b1 4s infinite ease;
+}
+
+#b2 {
+    animation: b2 4s infinite ease;
+}
+
+#b3 {
+    animation: b3 4s infinite ease;
+}
+
+#b4 {
+    animation: b4 4s infinite ease;
+}
+
+@keyframes b0 {
+    0% {
+        transform: rotate(0);
+    }
+
+    25% {
+        transform: rotate(-90deg);
+    }
+
+    50% {
+        transform: rotate(-180deg);
+    }
+
+    75% {
+        transform: rotate(-270deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes b1 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(0, 355px);
+    }
+
+    50% {
+        transform: translate(355px, 355px);
+    }
+
+    75% {
+        transform: translate(355px, 0);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes b2 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(-355px, 0);
+    }
+
+    50% {
+        transform: translate(-355px, 355px);
+    }
+
+    75% {
+        transform: translate(0, 355px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes b3 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(0, -355px);
+    }
+
+    50% {
+        transform: translate(-355px, -355px);
+    }
+
+    75% {
+        transform: translate(-355px, 0);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes b4 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(355px, 0);
+    }
+
+    50% {
+        transform: translate(355px, -355px);
+    }
+
+    75% {
+        transform: translate(0, -355px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
 }

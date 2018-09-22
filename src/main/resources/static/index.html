@@ -4,63 +4,55 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="/style.css" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+<link rel="stylesheet"href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="/app.js"></script>
 <script>
-
 	// When the page is opened
 	$(document).ready(function() {
 
 		// When you click the get poem button
 		$('#getPoem').on('click touchstart', function() {
-			// Hide or show a text
-			var x = document.getElementById("poemIsLoading");
-		    if (x.style.display === "none") {
-		        x.style.display = "block";
-		    } else {
-		        x.style.display = "none";
-		    }
-		    
-		 	// Delete table rows
-		    var table = document.getElementById("table");
-		    while(table.rows.length > 0) {
-		    	  table.deleteRow(0);
-		    	}
+			
+	        $(".mini-loader-content").show().css('display', 'flex');
+	        $('html,body').animate({scrollTop: $("#mini-loader").offset().top}, 'slow');
 
-		    // Trigger the spring boot controller and go to display() function with result
+			// Trigger the spring boot controller and go to display() function with result
 			$.ajax({
 				url : "get-poem.html",
-				data : {'sentence' : null},
+				data : {
+					'sentence' : null
+				},
 				success : function(data) {
 					addLineToTable(data);
 				}
 			});
-			
+
 		});
 
 	});
 
+	var i = 0;
 
 	// This is triggered by response from spring boot
 	function addLineToTable(data) {
 
-		var json = JSON.parse(data);
+		i++;
 
-		var newRow = document.getElementById('table').insertRow();
-
-		var lineString = "<td><div id=\'bookTitleAndAuthor\'>"
-							+ json.title + " - " + json.author + "</div>"
-							+ "<div id=\'sentence\'>" + json.sentence + "</div></td>";
-		
-		newRow.innerHTML = lineString;
-
-		var rowCount = document.getElementById("table").rows.length;
-		if (rowCount == 8) {
+		if (i == 9) {
+	        $(".mini-loader-content").hide();
+	        $('html,body').animate({scrollTop: $("#centered-title").offset().top}, 'slow');
 			return false;
 		}
-		if (rowCount % 2 != 0) {
+
+		var json = JSON.parse(data);
+
+		document.getElementById('title' + i).innerHTML = json.title + ' - ' + json.author;
+		document.getElementById('sentence' + i).innerHTML = json.sentence + ',';
+
+		if (i % 2 != 0) {
 			$.ajax({
 				url : "get-poem.html",
 				data : {
@@ -89,20 +81,67 @@
 <body>
 
 	<div class="jumbotron text-center">
-		<h1>Poem from books</h1>
-		<p>info about stuff.</p>
+		<h1><img src="https://melbournechapter.net/images/autumn-clipart-6.png" width="80" height="100">poetryscript</h1>
+		<p>discover beauty through chance.</p>
 	</div>
 
 	<div class="buttons">
-		<button class="button" id="getPoem" type="submit">get poem</button>
+		<button class="button" id="getPoem" type="submit">discover poem</button>
+	</div>
+
+	<div class="mini-loader-content">
+		<svg id="mini-loader" xmlns="http://www.w3.org/2000/svg" width="50"
+			height="50" viewBox="0 0 500.00001 500.00001">
+            <g>
+                <path id="b0"
+				d="M66.734 66.734v366.533h366.532V66.734H66.734zm15 15h336.532v336.533H81.734V81.734z">
+                </path>
+                <path id="b2"
+				d="M354.16 2.5v143.34H497.5V2.5H354.16zm10 10H487.5v123.34H364.16V12.5z">
+                </path>
+                <path id="b1"
+				d="M0 2.5v143.34h143.34V2.5H0zm10 10h123.34v123.34H10V12.5z">
+                </path>
+                <path id="b3"
+				d="M354.16 356.66V500H497.5V356.66H354.16zm10 10H487.5V490H364.16V366.66z">
+                </path>
+                <path id="b4"
+				d="M0 356.66V500h143.34V356.66H0zm10 10h123.34V490H10V366.66z">
+                </path>
+            </g>
+        </svg>
 	</div>
 	
-	<div id="poemIsLoading">Poem is loading.</div>
-
-		<table id="table">
-			<thead></thead>
-			<tbody></tbody>
-		</table>
+	<div class="list">
+		<div id="doublerow">
+			<div id="titleAndAuthor">
+				<ul>
+					<li><div id="title1"></div></li>
+					<li><div id="title2"></div></li>
+					<li><div id="title3"></div></li>
+					<li><div id="title4"></div></li>
+					<li><div id="title5"></div></li>
+					<li><div id="title6"></div></li>
+					<li><div id="title7"></div></li>
+					<li><div id="title8"></div></li>
+				</ul>
+			</div>
+		</div>
+		<div id="doublerow">
+			<div id="sentence">
+				<ul>
+					<li><div id="sentence1"></div></li>
+					<li><div id="sentence2"></div></li>
+					<li><div id="sentence3"></div></li>
+					<li><div id="sentence4"></div></li>
+					<li><div id="sentence5"></div></li>
+					<li><div id="sentence6"></div></li>
+					<li><div id="sentence7"></div></li>
+					<li><div id="sentence8"></div></li>
+				</ul>
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>
