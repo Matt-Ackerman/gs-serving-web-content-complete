@@ -84,7 +84,7 @@ public class RhymingSentence
         
         this.sentence = newSentenceString;
         this.authorOfBookSentenceIsFrom = newSentence.getAuthorOfBookSentenceIsFrom();
-        this.titleOfBookSentenceIsFrom = newSentence.getAuthorOfBookSentenceIsFrom();
+        this.titleOfBookSentenceIsFrom = newSentence.getTitleOfBookSentenceIsFrom();
     }
     
     public String getSentence()

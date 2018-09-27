@@ -32,7 +32,7 @@
 
 		});
 		
-		var infoIsShowing = false;
+/* 		var infoIsShowing = false;
 		$('#getInfo').on('click touchstart', function() {
 	        if (infoIsShowing) {
 	        	$("#orange-bar").hide('slow');
@@ -41,7 +41,7 @@
 	        	$("#orange-bar").show('slow').css('display', 'flex');
 	        	infoIsShowing = true;
 	        }
-		});
+		}); */
 
 	});
 
@@ -91,20 +91,23 @@
 </head>
 <body>
 
-	<div id="header">
-		<img src="https://melbournechapter.net/images/autumn-clipart-6.png"
-			width="80" height="100">poetryscript
+	<div id="header-background">
+		<div id="header">
+			<img src="https://melbournechapter.net/images/autumn-clipart-6.png"
+				width="80" height="100">poetryscript</div>
+
+		<div id="header2">discover beauty through chance.</div>
 	</div>
-	
-	<div id="header2">discover beauty through chance.</div>
-	
+
 	<div id="orange-bar">
-	the poetryscript project scans thousands of books from gutenberg.com to produce to produce rhyming schemes that follow conventional poetry standards. 
+		the poetryscript project scans thousands of
+		books from gutenberg.com to produce to produce rhyming schemes that
+		follow conventional poetry standards.
 	</div>
 
 	<div class="buttons">
 		<button class="button" id="getPoem" type="submit">discover</button>
-		<button class="button" id="getInfo" type="submit">about</button>
+		<!-- <button class="button" id="getInfo" type="submit">about</button> -->
 	</div>
 
 	<div class="mini-loader-content">
@@ -133,20 +136,6 @@
 	<div class="center-lists">
 		<div class="bothlists">
 			<div class="list">
-				<div id="titleAndAuthor">
-					<ul>
-						<li class="extraspace"><div id="title1"></div></li>
-						<li class="extraspace"><div id="title2"></div></li>
-						<li class="extraspace"><div id="title3"></div></li>
-						<li class="extraspace"><div id="title4"></div></li>
-						<li class="extraspace"><div id="title5"></div></li>
-						<li class="extraspace"><div id="title6"></div></li>
-						<li class="extraspace"><div id="title7"></div></li>
-						<li class="extraspace"><div id="title8"></div></li>
-					</ul>
-				</div>
-			</div>
-			<div class="list">
 				<div id="sentence">
 					<ul>
 						<li><div id="sentence1"></div></li>
@@ -157,6 +146,20 @@
 						<li><div id="sentence6"></div></li>
 						<li><div id="sentence7"></div></li>
 						<li><div id="sentence8"></div></li>
+					</ul>
+				</div>
+			</div>
+			<div class="list">
+				<div id="titleAndAuthor">
+					<ul>
+						<li class="extraspace"><div id="title1"></div></li>
+						<li class="extraspace"><div id="title2"></div></li>
+						<li class="extraspace"><div id="title3"></div></li>
+						<li class="extraspace"><div id="title4"></div></li>
+						<li class="extraspace"><div id="title5"></div></li>
+						<li class="extraspace"><div id="title6"></div></li>
+						<li class="extraspace"><div id="title7"></div></li>
+						<li class="extraspace"><div id="title8"></div></li>
 					</ul>
 				</div>
 			</div>
