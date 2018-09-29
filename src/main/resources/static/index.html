@@ -3,21 +3,98 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/x-icon" href="https://chatham.ces.ncsu.edu/wp-content/uploads/2016/11/large_autumn-leaves-456.png">
 <link href="/style.css" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">
 <link rel="stylesheet"href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="/app.js"></script>
-<script>
+
+</head>
+<body>
+
+	<div id=top-bar>
+		<ul>
+			<li><button id="getinfo" type="submit">about</button></li>
+			<li><button id="getcontact" type="submit">contact</button></li>
+		</ul>
+	</div>
+
+	<div id="info-bar"></div>
+
+	<div id="header-background">
+		<div id="header">
+			<img src=https://chatham.ces.ncsu.edu/wp-content/uploads/2016/11/large_autumn-leaves-456.png
+				width="80" height="100">poetryscript</div>
+
+		<div id="header2">discover beauty through chance.</div>
+	</div>
+	
+	<div class="buttons">
+		<button class="btn btn-green btn-border-rev" id="getPoem" type="submit">discover</button>
+	</div>
+
+
+	<div class="center-lists">
+		<div class="bothlists">
+			<div class="list">
+				<div id="sentence">
+					<ul>
+						<li><div id="sentence0"></div></li>
+						<li><div id="sentence1"></div></li>
+						<li><div id="sentence2"></div></li>
+						<li><div id="sentence3"></div></li>
+						<li><div id="sentence4"></div></li>
+						<li><div id="sentence5"></div></li>
+						<li><div id="sentence6"></div></li>
+						<li><div id="sentence7"></div></li>
+					</ul>
+				</div>
+			</div>
+			<div class="list">
+				<div id="titleAndAuthor">
+					<ul>
+						<li class="extraspace"><div id="title0"></div></li>
+						<li class="extraspace"><div id="title1"></div></li>
+						<li class="extraspace"><div id="title2"></div></li>
+						<li class="extraspace"><div id="title3"></div></li>
+						<li class="extraspace"><div id="title4"></div></li>
+						<li class="extraspace"><div id="title5"></div></li>
+						<li class="extraspace"><div id="title6"></div></li>
+						<li class="extraspace"><div id="title7"></div></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+
+	var wordToRhyme = [];
+	var i = 0;
+
 	// When the page is opened
 	$(document).ready(function() {
 
 		// When you click the get poem button
 		$('#getPoem').on('click touchstart', function() {
 			
-	        $(".mini-loader-content").show().css('display', 'flex');
-	        $('html,body').animate({scrollTop: $("#mini-loader").offset().top}, 'slow');
+			document.getElementById('getPoem').style.backgroundColor = "#eca54a";
+			
+	        for (var n = 0; n < 7; n++) {
+	        	document.getElementById('sentence' + n).innerHTML = "";
+	        }
+	        
+	        for (var m = 0; m < 7; m++) {
+	        	document.getElementById('title' + m).innerHTML = "";
+	        }
+	        
+	        i = 0;
+	        wordToRhyme = [];
+	        
 
 			// Trigger the spring boot controller and go to display() function with result
 			$.ajax({
@@ -32,41 +109,75 @@
 
 		});
 		
-/* 		var infoIsShowing = false;
-		$('#getInfo').on('click touchstart', function() {
-	        if (infoIsShowing) {
-	        	$("#orange-bar").hide('slow');
-	        	infoIsShowing = false;
+ 		var barIsShowing = false;
+ 		var barIsShowingAbout = false;
+ 		
+ 		$('#getinfo').on('click touchstart', function() {
+ 			document.getElementById('info-bar').innerHTML = "the poetryscript project scans thousands of " +
+ 				"books from <a href='\https://www.gutenberg.org\'>gutenberg.org</a> to produce poems that follow " + 
+ 				"conventional sonnet standards.";
+	        if (barIsShowing) {
+	        	if (barIsShowingAbout) {
+	        		$("#info-bar").slideUp('slow');
+		        	barIsShowing = false;
+		        	barIsShowingAbout = false;
+	        	} else {
+	        		barIsShowing = true;
+	        		barIsShowingAbout = true;
+	        	}
 	        } else {
-	        	$("#orange-bar").show('slow').css('display', 'flex');
-	        	infoIsShowing = true;
+	        	$("#info-bar").slideDown("slow");
+	        	barIsShowing = true;
+	        	barIsShowingAbout = true;
 	        }
-		}); */
-
+		});
+		
+		$('#getcontact').on('click touchstart', function() {
+			document.getElementById('info-bar').innerHTML = "contact info";
+	        if (barIsShowing) {
+	        	if (barIsShowingAbout) {
+		        	barIsShowingAbout = false;
+	        	} else {
+	        		$("#info-bar").slideUp('slow');
+		        	barIsShowing = false;
+		        	barIsShowingAbout = false;
+	        	}
+	        } else {
+	        	$("#info-bar").slideDown('slow');
+	        	barIsShowing = true;
+	        	barIsShowingAbout = false;
+	        }
+		});
 	});
 
-	var i = 0;
-
+	
+	
 	// This is triggered by response from spring boot
 	function addLineToTable(data) {
-
-		i++;
-
-		if (i == 9) {
-	        $(".mini-loader-content").hide();
-			return false;
-		}
+		
+		document.getElementById('getPoem').style.backgroundColor = "#e5e5e5";
 
 		var json = JSON.parse(data);
+		
+		wordToRhyme[i] = json.sentence;
 
 		document.getElementById('title' + i).innerHTML = json.title + ' - ' + json.author;
-		document.getElementById('sentence' + i).innerHTML = json.sentence + ',';
-
-		if (i % 2 != 0) {
+		
+		if (i == 7) {
+			document.getElementById('sentence' + i).innerHTML = json.sentence;
+	        /* $(".mini-loader-content").hide(); */
+			return false;
+		} else {
+			document.getElementById('sentence' + i).innerHTML = json.sentence + ',';
+		}
+		
+		i++;
+		
+		if (i == 2 || i == 3 || i == 6 || i == 7) {
 			$.ajax({
 				url : "get-poem.html",
 				data : {
-					'sentence' : json.sentence
+					'sentence' : wordToRhyme[i-2]
 				},
 				success : function(data) {
 					addLineToTable(data);
@@ -86,84 +197,11 @@
 
 	}
 	
+	
+	
+	
 </script>
+	
 
-</head>
-<body>
-
-	<div id="header-background">
-		<div id="header">
-			<img src="https://melbournechapter.net/images/autumn-clipart-6.png"
-				width="80" height="100">poetryscript</div>
-
-		<div id="header2">discover beauty through chance.</div>
-	</div>
-
-	<div id="orange-bar">
-		the poetryscript project scans thousands of
-		books from gutenberg.com to produce to produce rhyming schemes that
-		follow conventional poetry standards.
-	</div>
-
-	<div class="buttons">
-		<button class="button" id="getPoem" type="submit">discover</button>
-		<!-- <button class="button" id="getInfo" type="submit">about</button> -->
-	</div>
-
-	<div class="mini-loader-content">
-		<svg id="mini-loader" xmlns="http://www.w3.org/2000/svg" width="50"
-			height="50" viewBox="0 0 500.00001 500.00001">
-            <g>
-                <path id="b0"
-				d="M66.734 66.734v366.533h366.532V66.734H66.734zm15 15h336.532v336.533H81.734V81.734z">
-                </path>
-                <path id="b2"
-				d="M354.16 2.5v143.34H497.5V2.5H354.16zm10 10H487.5v123.34H364.16V12.5z">
-                </path>
-                <path id="b1"
-				d="M0 2.5v143.34h143.34V2.5H0zm10 10h123.34v123.34H10V12.5z">
-                </path>
-                <path id="b3"
-				d="M354.16 356.66V500H497.5V356.66H354.16zm10 10H487.5V490H364.16V366.66z">
-                </path>
-                <path id="b4"
-				d="M0 356.66V500h143.34V356.66H0zm10 10h123.34V490H10V366.66z">
-                </path>
-            </g>
-        </svg>
-	</div>
-
-	<div class="center-lists">
-		<div class="bothlists">
-			<div class="list">
-				<div id="sentence">
-					<ul>
-						<li><div id="sentence1"></div></li>
-						<li><div id="sentence2"></div></li>
-						<li><div id="sentence3"></div></li>
-						<li><div id="sentence4"></div></li>
-						<li><div id="sentence5"></div></li>
-						<li><div id="sentence6"></div></li>
-						<li><div id="sentence7"></div></li>
-						<li><div id="sentence8"></div></li>
-					</ul>
-				</div>
-			</div>
-			<div class="list">
-				<div id="titleAndAuthor">
-					<ul>
-						<li class="extraspace"><div id="title1"></div></li>
-						<li class="extraspace"><div id="title2"></div></li>
-						<li class="extraspace"><div id="title3"></div></li>
-						<li class="extraspace"><div id="title4"></div></li>
-						<li class="extraspace"><div id="title5"></div></li>
-						<li class="extraspace"><div id="title6"></div></li>
-						<li class="extraspace"><div id="title7"></div></li>
-						<li class="extraspace"><div id="title8"></div></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
 </body>
 </html>
