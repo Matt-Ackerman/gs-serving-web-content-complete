@@ -60,7 +60,7 @@ body {
 	text-align: center;
 	font-family: 'Lora', serif;
 	font-size: 4vw;
-	padding-top: 10vw;
+	padding-top: 8vw;
 }
 
 #header2 {
@@ -79,7 +79,7 @@ body {
 }
 
 ul li.extraspace {
-	margin: 1.4% 0;
+	margin: 1.5% 0;
 }
 
 #sentence {
@@ -124,20 +124,21 @@ ul {
 
 .btn {
 	display: inline-block;
-	line-height: 4vw;
+	line-height: 4%;
 	margin: 1%;
-	padding: 0 3%;
-	font-size: 3vw;
+	padding: 0vw 3vw;
 	position: relative;
 	opacity: .999;
-	border-radius: .3vw;
+	border-radius: .3%;
 	padding-bottom: 3vw;
 	outline: none !important;
+ 	line-height: 3vw;
+	line-width: 10vw;
 }
 
 .btn-border-rev {
 	background-color: #e5e5e5;
-	border: .3vw solid #e5e5e5;
+	border: .3% solid #e5e5e5;
 	color: black;
 }
 
@@ -146,7 +147,7 @@ ul {
 	border-style: solid;
 	position: absolute;
 	z-index: 5;
-	border-radius: .3vw;
+	border-radius: .3%;
 	box-sizing: content-box;
 }
 

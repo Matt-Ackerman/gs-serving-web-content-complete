@@ -60,8 +60,8 @@
  		var barIsShowingAbout = false;
  		
  		$('#getinfo').on('click touchstart', function() {
- 			document.getElementById('info-bar').innerHTML = "the poetryscript project scans thousands of " +
- 				"books from <a href='\https://www.gutenberg.org\'>gutenberg.org</a> to produce 8-line poems that follow " + 
+ 			document.getElementById('info-bar').innerHTML = "the poetryscript project scans from among " +
+ 				"<a href='\https://www.gutenberg.org\'>gutenberg.org</a>'s 57,000 novels to produce randomly-generated 8-line poems that follow " + 
  				"conventional sonnet standards.";
 	        if (barIsShowing) {
 	        	if (barIsShowingAbout) {
@@ -80,7 +80,7 @@
 		});
 		
 		$('#getcontact').on('click touchstart', function() {
-			document.getElementById('info-bar').innerHTML = "contact info";
+			document.getElementById('info-bar').innerHTML = "poetryscript.project@gmail.com";
 	        if (barIsShowing) {
 	        	if (barIsShowingAbout) {
 		        	barIsShowingAbout = false;
@@ -164,7 +164,7 @@
 		<div id="header2">discover beauty through chance.</div>
 	
 	<div class="buttons">
-		<button class="btn btn-green btn-border-rev" id="getPoem" type="submit">discover</button>
+		<button class="btn btn-green btn-border-rev" id="getPoem" type="submit" style="font-size : 1.5vw;">discover</button>
 	</div>
 
 
