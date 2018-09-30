@@ -25,17 +25,29 @@ public class BookUtility {
 				createStringFromBookFile("A Tale of Two Cities.txt"));
 		Book book3 = new Book("The Adventures of Tom Sawyer", "Mark Twain",
 				createStringFromBookFile("The Adventures of Tom Sawyer.txt"));
-		Book book4 = new Book("The Iliad of Homer", "Homer",
-				createStringFromBookFile("The Iliad of Homer.txt"));
+		Book book4 = new Book("The Iliad of Homer", "Homer", createStringFromBookFile("The Iliad of Homer.txt"));
 		Book book5 = new Book("Treasure Island", "Robert Louis Stevenson",
 				createStringFromBookFile("Treasure Island.txt"));
-		
+		Book book6 = new Book("Alice's Adventures in Wonderland", "Lewis Carroll",
+				createStringFromBookFile("Alices Adventures in Wonderland.txt"));
+		Book book7 = new Book("Dracula", "Bram Stoker", createStringFromBookFile("Dracula.txt"));
+		Book book8 = new Book("The Strange Case of Dr Jekyll and Mr Hyde", "Robert Louis Stevenson",
+				createStringFromBookFile("The Strange Case of Dr Jekyll and Mr Hyde.txt"));
+		Book book9 = new Book("The Yellow Wallpaper", "Charlotte Perkins Gilman", createStringFromBookFile("The Yellow Wallpaper.txt"));
+		Book book10 = new Book("Grimm's Fairy Tales", "The Brothers Grimm", createStringFromBookFile("Grimms Fairy Tales.txt"));
+		// Book book6 = new Book("", "", "");
+
 		books = new ArrayList<Book>();
 		books.add(book1);
 		books.add(book2);
 		books.add(book3);
 		books.add(book4);
 		books.add(book5);
+		books.add(book6);
+		books.add(book7);
+		books.add(book8);
+		books.add(book9);
+		books.add(book10);
 	}
 	
 	/*

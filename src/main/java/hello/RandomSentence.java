@@ -109,10 +109,9 @@ public class RandomSentence
     	sentence = sentence.replace("(", "");
     	sentence = sentence.replace(")", "");
     	sentence = sentence.replace("_", "");
-    	//if (false)//Character.isWhitespace(sentence.charAt(1)))
-    	//{
-    	//	sentence = sentence.substring(2, sentence.length());
-    	//}
+    	sentence = sentence.replace("“", "\"");
+    	sentence = sentence.replace("”", "\"");
+    	sentence = sentence.replace("�", "");
     	return sentence;
     }
     

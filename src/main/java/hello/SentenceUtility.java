@@ -61,10 +61,11 @@ public class SentenceUtility
      */
     public boolean checkIfSentenceMatchesCriteria(String sentence, boolean isSentenceToBeRhymedOffOf) throws IOException
     {
-    	if (!sentence.contains(" "))
+    	if (!sentence.contains(" ") || sentence.matches(".*\\d+.*"))
     	{
     		return false;
     	}
+		
     	if (getLastWordOfSentence(sentence).equals("Mr") || getLastWordOfSentence(sentence).equals("Mrs"))
     	{
     		return false;

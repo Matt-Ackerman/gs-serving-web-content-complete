@@ -12,65 +12,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="/app.js"></script>
-
-</head>
-<body>
-
-	<div id=top-bar>
-		<ul>
-			<li><button id="getinfo" type="submit">about</button></li>
-			<li><button id="getcontact" type="submit">contact</button></li>
-		</ul>
-	</div>
-
-	<div id="info-bar"></div>
-
-	<div id="header-background">
-		<div id="header">
-			<img src=https://chatham.ces.ncsu.edu/wp-content/uploads/2016/11/large_autumn-leaves-456.png
-				width="80" height="100">poetryscript</div>
-
-		<div id="header2">discover beauty through chance.</div>
-	</div>
-	
-	<div class="buttons">
-		<button class="btn btn-green btn-border-rev" id="getPoem" type="submit">discover</button>
-	</div>
-
-
-	<div class="center-lists">
-		<div class="bothlists">
-			<div class="list">
-				<div id="sentence">
-					<ul>
-						<li><div id="sentence0"></div></li>
-						<li><div id="sentence1"></div></li>
-						<li><div id="sentence2"></div></li>
-						<li><div id="sentence3"></div></li>
-						<li><div id="sentence4"></div></li>
-						<li><div id="sentence5"></div></li>
-						<li><div id="sentence6"></div></li>
-						<li><div id="sentence7"></div></li>
-					</ul>
-				</div>
-			</div>
-			<div class="list">
-				<div id="titleAndAuthor">
-					<ul>
-						<li class="extraspace"><div id="title0"></div></li>
-						<li class="extraspace"><div id="title1"></div></li>
-						<li class="extraspace"><div id="title2"></div></li>
-						<li class="extraspace"><div id="title3"></div></li>
-						<li class="extraspace"><div id="title4"></div></li>
-						<li class="extraspace"><div id="title5"></div></li>
-						<li class="extraspace"><div id="title6"></div></li>
-						<li class="extraspace"><div id="title7"></div></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-
 	<script>
 
 	var wordToRhyme = [];
@@ -84,12 +25,9 @@
 			
 			document.getElementById('getPoem').style.backgroundColor = "#eca54a";
 			
-	        for (var n = 0; n < 7; n++) {
+	        for (var n = 0; n < 8; n++) {
 	        	document.getElementById('sentence' + n).innerHTML = "";
-	        }
-	        
-	        for (var m = 0; m < 7; m++) {
-	        	document.getElementById('title' + m).innerHTML = "";
+	        	document.getElementById('title' + n).innerHTML = "";
 	        }
 	        
 	        i = 0;
@@ -114,7 +52,7 @@
  		
  		$('#getinfo').on('click touchstart', function() {
  			document.getElementById('info-bar').innerHTML = "the poetryscript project scans thousands of " +
- 				"books from <a href='\https://www.gutenberg.org\'>gutenberg.org</a> to produce poems that follow " + 
+ 				"books from <a href='\https://www.gutenberg.org\'>gutenberg.org</a> to produce 8-line poems that follow " + 
  				"conventional sonnet standards.";
 	        if (barIsShowing) {
 	        	if (barIsShowingAbout) {
@@ -164,7 +102,7 @@
 		document.getElementById('title' + i).innerHTML = json.title + ' - ' + json.author;
 		
 		if (i == 7) {
-			document.getElementById('sentence' + i).innerHTML = json.sentence;
+			document.getElementById('sentence' + i).innerHTML = json.sentence + ".";
 	        /* $(".mini-loader-content").hide(); */
 			return false;
 		} else {
@@ -196,12 +134,63 @@
 		}
 
 	}
-	
-	
-	
-	
 </script>
 	
+</head>
+<body>
+
+	<div id=top-bar>
+		<ul>
+			<li><button id="getinfo" type="submit">about</button></li>
+			<li><button id="getcontact" type="submit">contact</button></li>
+		</ul>
+	</div>
+
+	<div id="info-bar"></div>
+
+		<div id="header">
+			<img src=https://chatham.ces.ncsu.edu/wp-content/uploads/2016/11/large_autumn-leaves-456.png
+				width="10%" height="13%">poetryscript</div>
+
+		<div id="header2">discover beauty through chance.</div>
+	
+	<div class="buttons">
+		<button class="btn btn-green btn-border-rev" id="getPoem" type="submit">discover</button>
+	</div>
+
+
+	<div class="center-lists">
+		<div class="bothlists">
+			<div class="list">
+				<div id="sentence">
+					<ul>
+						<li><div id="sentence0"></div></li>
+						<li><div id="sentence1"></div></li>
+						<li><div id="sentence2"></div></li>
+						<li><div id="sentence3"></div></li>
+						<li><div id="sentence4"></div></li>
+						<li><div id="sentence5"></div></li>
+						<li><div id="sentence6"></div></li>
+						<li><div id="sentence7"></div></li>
+					</ul>
+				</div>
+			</div>
+			<div class="list">
+				<div id="titleAndAuthor">
+					<ul>
+						<li class="extraspace"><div id="title0"></div></li>
+						<li class="extraspace"><div id="title1"></div></li>
+						<li class="extraspace"><div id="title2"></div></li>
+						<li class="extraspace"><div id="title3"></div></li>
+						<li class="extraspace"><div id="title4"></div></li>
+						<li class="extraspace"><div id="title5"></div></li>
+						<li class="extraspace"><div id="title6"></div></li>
+						<li class="extraspace"><div id="title7"></div></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>
