@@ -22,7 +22,45 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="/app.js"></script>
 	<script>
+
+	var wordToRhyme = [];
+	var i = 0;
 	
+	var poemRoundNumber = 0;
+
+	// When the page is opened
+	$(document).ready(function() {
+
+		// When you click the get poem button
+		$('#getPoem').on('click touchstart', function() {
+			
+			document.getElementById('getPoem').style.backgroundColor = "#eca54a";
+			
+	        for (var n = 0; n < 8; n++) {
+	        	document.getElementById('sentence' + n).innerHTML = "";
+	        	document.getElementById('title' + n).innerHTML = "";
+	        }
+	        
+	        i = 0;
+	        wordToRhyme = [];
+	        poemRoundNumber++;
+	        
+
+			// Trigger the spring boot controller and go to display() function with result
+			$.ajax({
+				url : "get-poem.html",
+				data : {
+					'sentence' : null,
+					'poemRoundNumber' : poemRoundNumber
+				},
+				success : function(data) {
+					addLineToTable(data);
+				}
+			});
+
+		});
+		
+
 		var barIsShowing = false;
  		var barIsShowingAbout = false;
  		
@@ -61,43 +99,6 @@
 	        	barIsShowing = true;
 	        	barIsShowingAbout = false;
 	        }
-		});
-
-	var wordToRhyme = [];
-	var i = 0;
-	
-	var poemRoundNumber = 0;
-
-	// When the page is opened
-	$(document).ready(function() {
-
-		// When you click the get poem button
-		$('#getPoem').on('click touchstart', function() {
-			
-			document.getElementById('getPoem').style.backgroundColor = "#eca54a";
-			
-	        for (var n = 0; n < 8; n++) {
-	        	document.getElementById('sentence' + n).innerHTML = "";
-	        	document.getElementById('title' + n).innerHTML = "";
-	        }
-	        
-	        i = 0;
-	        wordToRhyme = [];
-	        poemRoundNumber++;
-	        
-
-			// Trigger the spring boot controller and go to display() function with result
-			$.ajax({
-				url : "get-poem.html",
-				data : {
-					'sentence' : null,
-					'poemRoundNumber' : poemRoundNumber
-				},
-				success : function(data) {
-					addLineToTable(data);
-				}
-			});
-
 		});
 		
 	});

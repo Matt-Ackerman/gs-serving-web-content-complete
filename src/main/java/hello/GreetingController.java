@@ -22,7 +22,6 @@ public class GreetingController {
 	                  .put("author", randomSentence.getAuthorOfBookSentenceIsFrom())
 	                  .put("poemRoundNumber", poemRoundNumber)
 	                  .toString();
-			System.out.println(randomSentence.getSentence());
 			return jsonString;
 		}
 		else
@@ -34,7 +33,6 @@ public class GreetingController {
 	                  .put("author", rhymingSentence.getAuthorOfBookSentenceIsFrom())
 	                  .put("poemRoundNumber", poemRoundNumber)
 	                  .toString();
-			System.out.println(rhymingSentence.getSentence() + "..........." + sentence);
 			return jsonString;
 		}
     }
