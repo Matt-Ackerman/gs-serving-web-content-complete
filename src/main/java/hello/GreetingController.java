@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class GreetingController {
     
     @RequestMapping(value = "/get-poem", method = RequestMethod.GET)
-    public @ResponseBody String send(String sentence) throws Exception {
+    public @ResponseBody String send(String sentence, int poemRoundNumber) throws Exception {
     	
 		if (sentence.equals(""))
 		{
@@ -20,7 +20,9 @@ public class GreetingController {
 	                  .put("sentence", randomSentence.getSentence())
 	                  .put("title", randomSentence.getTitleOfBookSentenceIsFrom())
 	                  .put("author", randomSentence.getAuthorOfBookSentenceIsFrom())
+	                  .put("poemRoundNumber", poemRoundNumber)
 	                  .toString();
+			System.out.println(randomSentence.getSentence());
 			return jsonString;
 		}
 		else
@@ -30,7 +32,9 @@ public class GreetingController {
 	                  .put("sentence", rhymingSentence.getSentence())
 	                  .put("title", rhymingSentence.getTitleOfBookSentenceIsFrom())
 	                  .put("author", rhymingSentence.getAuthorOfBookSentenceIsFrom())
+	                  .put("poemRoundNumber", poemRoundNumber)
 	                  .toString();
+			System.out.println(rhymingSentence.getSentence() + "..........." + sentence);
 			return jsonString;
 		}
     }
