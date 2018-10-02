@@ -22,14 +22,49 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="/app.js"></script>
 	<script>
-
+	
+	function setCookie(name,value,days) {
+	    var expires = "";
+	    if (days) {
+	        var date = new Date();
+	        date.setTime(date.getTime() + (days*24*60*60*1000));
+	        expires = "; expires=" + date.toUTCString();
+	    }
+	    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+	}
+	function getCookie(name) {
+	    var nameEQ = name + "=";
+	    var ca = document.cookie.split(';');
+	    for(var i=0;i < ca.length;i++) {
+	        var c = ca[i];
+	        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+	        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	    }
+	    return null;
+	}
+	
 	var wordToRhyme = [];
 	var i = 0;
 	
 	var poemRoundNumber = 0;
+	
+	var firstTimeUser;
 
 	// When the page is opened
 	$(document).ready(function() {
+		
+		// See if its the user's first time on website, if it is, open up the 'about' tab.
+		var x = getCookie('cookie');
+		if (!x) {
+ 			document.getElementById('info-bar').innerHTML = "the poetryscript project scans from among " +
+				"<a href='\https://www.gutenberg.org\'>gutenberg.org</a>'s 57,000 novels to produce randomly-generated 8-line poems that follow " + 
+				"conventional sonnet standards. <b>Each sonnet is unique and will never be recreated by you or anyone else.</b>";
+			$("#info-bar").slideDown("slow");
+			firstTimeUser = true;
+        	barIsShowing = true;
+        	barIsShowingAbout = true;
+		    setCookie('cookie','cookie', 182);
+		}
 
 		// When you click the get poem button
 		$('#getPoem').on('click touchstart', function() {
@@ -44,7 +79,6 @@
 	        i = 0;
 	        wordToRhyme = [];
 	        poemRoundNumber++;
-	        
 
 			// Trigger the spring boot controller and go to display() function with result
 			$.ajax({
@@ -64,10 +98,10 @@
 		var barIsShowing = false;
  		var barIsShowingAbout = false;
  		
- 		$('#getinfo').on('click touchstart', function() {
+ 		$('#getinfo').on('click', function() {
  			document.getElementById('info-bar').innerHTML = "the poetryscript project scans from among " +
  				"<a href='\https://www.gutenberg.org\'>gutenberg.org</a>'s 57,000 novels to produce randomly-generated 8-line poems that follow " + 
- 				"conventional sonnet standards.";
+ 				"conventional sonnet standards. <b>Each sonnet is unique and will never be recreated.</b>";
 	        if (barIsShowing) {
 	        	if (barIsShowingAbout) {
 	        		$("#info-bar").slideUp('slow');
@@ -84,7 +118,7 @@
 	        }
 		});
 		
-		$('#getcontact').on('click touchstart', function() {
+		$('#getcontact').on('click', function() {
 			document.getElementById('info-bar').innerHTML = "poetryscript.project@gmail.com";
 	        if (barIsShowing) {
 	        	if (barIsShowingAbout) {
@@ -119,9 +153,14 @@
 
 		document.getElementById('title' + i).innerHTML = json.title + ' - ' + json.author;
 		
+		// if its a first time user, the 'about' tab is open so close it now.
+		if (firstTimeUser) {
+			$("#info-bar").slideUp("slow");
+			firstTimeUser = false;
+		}
+
 		if (i == 7) {
 			document.getElementById('sentence' + i).innerHTML = json.sentence + ".";
-	        /* $(".mini-loader-content").hide(); */
 			return false;
 		} else {
 			document.getElementById('sentence' + i).innerHTML = json.sentence + ',';
