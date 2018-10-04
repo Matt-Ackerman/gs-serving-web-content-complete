@@ -9,13 +9,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class GreetingController {
+	
+	private BookUtility bookUtility = new BookUtility();
     
     @RequestMapping(value = "/get-poem", method = RequestMethod.GET)
     public @ResponseBody String send(String sentence, int poemRoundNumber) throws Exception {
     	
 		if (sentence.equals(""))
 		{
-			RandomSentence randomSentence = new RandomSentence();
+			RandomSentence randomSentence = new RandomSentence(bookUtility);
 			String jsonString = new JSONObject()
 	                  .put("sentence", randomSentence.getSentence())
 	                  .put("title", randomSentence.getTitleOfBookSentenceIsFrom())
@@ -26,7 +28,7 @@ public class GreetingController {
 		}
 		else
 		{
-			RhymingSentence rhymingSentence = new RhymingSentence(sentence);
+			RhymingSentence rhymingSentence = new RhymingSentence(bookUtility, sentence);
 			String jsonString = new JSONObject()
 	                  .put("sentence", rhymingSentence.getSentence())
 	                  .put("title", rhymingSentence.getTitleOfBookSentenceIsFrom())

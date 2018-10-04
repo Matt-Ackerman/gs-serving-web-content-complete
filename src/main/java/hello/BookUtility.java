@@ -1,10 +1,14 @@
 package hello;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 public class BookUtility {
@@ -17,61 +21,82 @@ public class BookUtility {
 	/*
 	 * 
 	 */
-	public BookUtility() throws IOException
+	public BookUtility()
 	{
-		Book book1 = new Book("Pride and Predjudice", "Jane Austen",
-				createStringFromBookFile("Pride and Prejudice.txt"));
-		Book book2 = new Book("A Tale of Two Cities", "Charles Dickens",
-				createStringFromBookFile("A Tale of Two Cities.txt"));
-		Book book3 = new Book("The Adventures of Tom Sawyer", "Mark Twain",
-				createStringFromBookFile("The Adventures of Tom Sawyer.txt"));
-		Book book4 = new Book("The Iliad of Homer", "Homer", createStringFromBookFile("The Iliad of Homer.txt"));
-		Book book5 = new Book("Treasure Island", "Robert Louis Stevenson",
-				createStringFromBookFile("Treasure Island.txt"));
-		Book book6 = new Book("Alice's Adventures in Wonderland", "Lewis Carroll",
-				createStringFromBookFile("Alices Adventures in Wonderland.txt"));
-		Book book7 = new Book("Dracula", "Bram Stoker", createStringFromBookFile("Dracula.txt"));
-		Book book8 = new Book("The Strange Case of Dr Jekyll and Mr Hyde", "Robert Louis Stevenson",
-				createStringFromBookFile("The Strange Case of Dr Jekyll and Mr Hyde.txt"));
-		Book book9 = new Book("The Yellow Wallpaper", "Charlotte Perkins Gilman", createStringFromBookFile("The Yellow Wallpaper.txt"));
-		Book book10 = new Book("Grimm's Fairy Tales", "The Brothers Grimm", createStringFromBookFile("Grimms Fairy Tales.txt"));
-		// Book book6 = new Book("", "", "");
-
-		books = new ArrayList<Book>();
-		books.add(book1);
-		books.add(book2);
-		books.add(book3);
-		books.add(book4);
-		books.add(book5);
-		books.add(book6);
-		books.add(book7);
-		books.add(book8);
-		books.add(book9);
-		books.add(book10);
+		try {
+			books = createBooks();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		for (Book book : books)
+		{
+			System.out.println(book.getTitle());
+			System.out.println(book.getAuthor());
+		}
 	}
 	
 	/*
 	 * Creates a String object from a book text file.
 	 */
-	public String createStringFromBookFile(String fileName) throws IOException {
-    	Class clazz = GreetingController.class;
-        InputStream inputStream = clazz.getResourceAsStream(fileName);
-        String book = readFromInputStream(inputStream);
-        return book;
+	public ArrayList<Book> createBooks() throws IOException {
+		
+		ArrayList<Book> books = new ArrayList<>();
+		
+		Files.list(new File("books/").toPath()).forEach(path -> {
+		    File file = path.toFile();
+	        try {
+				InputStream inputStream = new FileInputStream(file);
+				HashMap<String, String> bookInfo = readFromInputStream(inputStream);
+				Book book = new Book(bookInfo.get("title"), bookInfo.get("author"), bookInfo.get("text"));
+				books.add(book);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		return books;
 	}
 	
 	/*
 	 * For reading book.
 	 */
-    private String readFromInputStream(InputStream inputStream) throws IOException {
-	    StringBuilder resultStringBuilder = new StringBuilder();
-	    try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+
+    private HashMap<String, String> readFromInputStream(InputStream inputStream) throws IOException
+    {
+    	
+	    StringBuilder title = new StringBuilder();
+	    StringBuilder author = new StringBuilder();
+	    StringBuilder text = new StringBuilder();
+	    
+	    HashMap<String, String> bookData = new HashMap<>();
+	    try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream)))
+	    {
 	        String line;
-	        while ((line = br.readLine()) != null) {
-	            resultStringBuilder.append(line).append(" \n");
+	        int i = 0;
+	        while ((line = br.readLine()) != null)
+	        {
+	        	if (i < 50)
+	        	{
+		        	if (line.contains("Title:"))
+		        	{
+		        		title.append(line).append(" \n");
+		        	}
+		        	else if (line.contains("Author:"))
+		        	{
+		        		author.append(line).append(" \n");
+		        	}
+	        	}
+	        	else
+	        	{
+	        		text.append(line).append(" \n");	
+	        	}
+	        	i++;
 	        }
+	        
+	        bookData.put("title", title.substring(title.indexOf(":") + 2));
+	        bookData.put("text", text.toString());
+	        bookData.put("author", author.substring(author.indexOf(":") + 2));
 	    }
-	  return resultStringBuilder.toString();
+	    return bookData;
     }
     
     /*

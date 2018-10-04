@@ -39,10 +39,10 @@ public class RhymingSentence
 	/*
 	 * 
 	 */
-	public RhymingSentence(String sentenceToRhymeOffOf) throws IOException
+	public RhymingSentence(BookUtility bookUtility, String sentenceToRhymeOffOf) throws IOException
 	{
 		 sentenceUtility = new SentenceUtility();
-		 bookUtility = new BookUtility();
+		 this.bookUtility = bookUtility;
 		 
 		 // the sentence we need to find a rhyming sentence for
 		 this.sentenceToRhymeOffOf = sentenceToRhymeOffOf;
@@ -67,7 +67,7 @@ public class RhymingSentence
     			sentenceUtility.getRhymingWordsForSentence(sentenceToRhymeOffOf);
     	
     	// create a random new sentence
-    	RandomSentence newSentence = new RandomSentence();
+    	RandomSentence newSentence = new RandomSentence(bookUtility);
     	String newSentenceString = newSentence.getSentence();
 		
     	// get the last word from the random new sentence

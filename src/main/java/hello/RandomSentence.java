@@ -34,9 +34,9 @@ public class RandomSentence
 	/*
 	 * 
 	 */
-	public RandomSentence() throws IOException
+	public RandomSentence(BookUtility bookUtility) throws IOException
 	{
-		bookUtility = new BookUtility();
+		this.bookUtility = bookUtility;
 		sentenceUtility = new SentenceUtility();
 		
 		// Find the random sentence
