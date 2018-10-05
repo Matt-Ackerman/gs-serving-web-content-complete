@@ -112,14 +112,13 @@ public class RandomSentence
     	sentence = sentence.replace("“", "\"");
     	sentence = sentence.replace("”", "\"");
     	sentence = sentence.replace("�", "");
+    	
+		if (!Character.isLetter(sentence.charAt(0))) {
+			sentence = sentence.substring(1, sentence.length());
+		}
     	return sentence;
     }
     
-	public void setSentence(String sentence)
-	{
-		this.sentence = sentence;
-	}
-	
     public String getSentence()
     {
     	return sentence;
@@ -129,32 +128,16 @@ public class RandomSentence
 		return bookUtility;
 	}
 
-	public void setBookUtility(BookUtility bookUtility) {
-		this.bookUtility = bookUtility;
-	}
-
 	public SentenceUtility getSentenceUtility() {
 		return sentenceUtility;
-	}
-
-	public void setSentenceUtility(SentenceUtility sentenceUtility) {
-		this.sentenceUtility = sentenceUtility;
 	}
 
 	public String getTitleOfBookSentenceIsFrom() {
 		return titleOfBookSentenceIsFrom;
 	}
-
-	public void setTitleOfBookSentenceIsFrom(String titleOfBookSentenceIsFrom) {
-		this.titleOfBookSentenceIsFrom = titleOfBookSentenceIsFrom;
-	}
-
+	
 	public String getAuthorOfBookSentenceIsFrom() {
 		return authorOfBookSentenceIsFrom;
-	}
-
-	public void setAuthorOfBookSentenceIsFrom(String authorOfBookSentenceIsFrom) {
-		this.authorOfBookSentenceIsFrom = authorOfBookSentenceIsFrom;
 	}
 
 }

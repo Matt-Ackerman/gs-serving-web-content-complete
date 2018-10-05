@@ -28,11 +28,6 @@ public class BookUtility {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		for (Book book : books)
-		{
-			System.out.println(book.getTitle());
-			System.out.println(book.getAuthor());
-		}
 	}
 	
 	/*
@@ -53,6 +48,8 @@ public class BookUtility {
 				e.printStackTrace();
 			}
 		});
+		
+		System.out.println("!!!!!! --    Book Count    -- !!!!!!   " + books.size());
 		return books;
 	}
 	
